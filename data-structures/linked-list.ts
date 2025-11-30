@@ -1,7 +1,8 @@
 export class ListNode<T> {
-  constructor(public value: T, public next: ListNode<T> | null) {
+  next: ListNode<T> | null;
+  constructor(public value: T) {
     this.value = value;
-    this.next = next;
+    this.next = null;
   }
 }
 
@@ -9,19 +10,20 @@ export class LinkedList<T> {
   head: ListNode<T>;
   tail: ListNode<T>;
   constructor() {
-    this.head = new ListNode(null as any, null);
+    this.head = new ListNode(null as any);
     this.tail = this.head;
   }
 
   append(value: T) {
-    const newNode = new ListNode(value, null);
+    const newNode = new ListNode(value);
     this.tail.next = newNode;
     this.tail = newNode;
   }
 
   prepend(value: T) {
     const next = this.head.next;
-    const newNode = new ListNode(value, next);
+    const newNode = new ListNode(value);
+    newNode.next = next;
     this.head.next = newNode;
   }
 
@@ -67,7 +69,7 @@ export class LinkedList<T> {
   }
 
   clear() {
-    this.head = new ListNode(null as any, null);
+    this.head = new ListNode(null as any);
     this.tail = this.head;
   }
 
